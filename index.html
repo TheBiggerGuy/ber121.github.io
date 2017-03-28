@@ -315,10 +315,10 @@ body {
         <div class="col-md-6">
           <h2>Contact Me</h2>
           <ul class="list-group">
-            <li class="list-group-item">
+            <li id="contact-spark" class="list-group-item">
               <a href="tel:+640274301349" role="button" class="btn btn-success btn-lg btn-block">+64 027 4301349</a>
             </li>
-            <li class="list-group-item">
+            <li id="contact-skype" class="list-group-item">
               <div id="SkypeButton_Call_thebigguy-co-uk_1" class="btn btn-lg btn-block"></div>
             </li>
           </ul>
@@ -345,7 +345,7 @@ body {
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
@@ -356,8 +356,26 @@ body {
         m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
       })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
+      var isDev = location.hostname === 'localhost' || location.hostname === '';
+      if (isDev) {
+        ga('set', 'sendHitTask', null);
+      }
+
       ga('create', 'UA-96237970-1', 'auto');
       ga('send', 'pageview');
+
+      $(function(){
+        $.each(['spark', 'skype'], function(i, type) {
+          $('#contact-' + type + ' a').on('click', function(event) {
+            ga('send', 'event', {
+              'eventCategory': 'contact',
+              'eventAction': type,
+              'eventLabel': event.target.href,
+              'transport': 'beacon'
+              });
+          });
+        });
+      });
     </script>
 
     <script type="text/javascript" src="https://secure.skypeassets.com/i/scom/js/skype-uri.js"></script>
