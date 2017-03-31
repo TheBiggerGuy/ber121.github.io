@@ -179,6 +179,9 @@ body {
       </div>
     </div>
 
+    <div class="alert alert-info" role="alert">
+      <strong>Sold:</strong> The car was sold on Fri 32 March 2017.
+    </div>
 
     <!-- Carousel
     ================================================== -->
@@ -366,7 +369,7 @@ body {
 
       $(function(){
         $.each(['spark', 'skype'], function(i, type) {
-          $('#contact-' + type + ' a').on('click', function(event) {
+            $('#contact-' + type + ' a').on('click', function(event) {
             ga('send', 'event', {
               'eventCategory': 'contact',
               'eventAction': type,
